@@ -1,5 +1,6 @@
 from visualisation import draw_suffix_tree
 
+
 class Node:
     # ID used in algorithm to check if root or not
     id = 0
@@ -77,18 +78,19 @@ class SuffixTree:
 
             # matching edge
             else:
-
-                if self.active_node.children[self.string[self.active_edge]].start + self.active_length == \
-                        self.active_node.children[self.string[self.active_edge]].end:
-                    self.active_node = self.active_node.children[self.string[self.active_edge]]
-                    self.active_edge = None
-                    self.active_length = 0
-                    break
                 # next character from current position is matching
                 # increment active_length
-                elif self.string[self.active_node.children[self.string[self.active_edge]].start + self.active_length] == \
+                if self.string[self.active_node.children[self.string[self.active_edge]].start + self.active_length] == \
                         self.string[i]:
                     self.active_length += 1
+
+                    if self.active_node.children[self.string[self.active_edge]].start + self.active_length - 1 == \
+                            self.active_node.children[self.string[self.active_edge]].end and not \
+                    self.active_node.children[self.string[self.active_edge]].is_leaf:
+                        self.active_node = self.active_node.children[self.string[self.active_edge]]
+                        self.active_edge = None
+                        self.active_length = 0
+
                     break
                     # check if walking to next node
 
@@ -125,5 +127,4 @@ class SuffixTree:
 
 if __name__ == "__main__":
     suffix_tree = SuffixTree()
-    suffix_tree.build("abcabxabcd", visualise=True)
-
+    suffix_tree.build("maximilianjaszewski", visualise=True)

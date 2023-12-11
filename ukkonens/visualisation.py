@@ -14,6 +14,7 @@ def draw_suffix_tree(suffix_tree, i):
         "active_length": suffix_tree.active_length,
         "string": suffix_tree.string[:i] + "_" + suffix_tree.string[i] + "_" + suffix_tree.string[i+1:]
     }
+    plt.clf()
     # Create a simple graph
     graph = nx.Graph()
     labels = {}
