@@ -5,14 +5,13 @@ import matplotlib.pyplot as plt
 Using networkx and matplotlib to visualise output of ukkonens
 """
 
-def draw_suffix_tree(suffix_tree, i):
+def visualise(suffix_tree):
 
     graph_labels = {
         "remainder": suffix_tree.remainder,
         "active_node": suffix_tree.active_node.id,
         "active_edge": suffix_tree.string[suffix_tree.active_edge] if suffix_tree.active_edge else "none",
         "active_length": suffix_tree.active_length,
-        "string": suffix_tree.string[:i] + "_" + suffix_tree.string[i] + "_" + suffix_tree.string[i+1:]
     }
     plt.clf()
     # Create a simple graph
