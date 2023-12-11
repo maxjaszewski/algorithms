@@ -1,4 +1,4 @@
-# Algorithms and Visualisatons in Python
+# Algorithms and Visualisations in Python
 Algorithms implemented in python.
 All algorithms have visualisation methods created with them for learning.
 
