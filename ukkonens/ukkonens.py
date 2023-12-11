@@ -40,7 +40,7 @@ class SuffixTree:
         self.string = ""
         self.size = 0
 
-    def build(self, data: str):
+    def build(self, data: str, visualise=False):
         self.string = data
         self.size = len(data)
         self.root = self.create_node(-1, -1, False)
@@ -48,7 +48,7 @@ class SuffixTree:
         self.active_node = self.root
         for i in range(self.size):
             self.extend(i)
-            draw_suffix_tree(self.string, self.root)
+            visualise and draw_suffix_tree(self, i)
 
     def create_node(self, start, end, is_leaf):
         node = Node(is_leaf)
@@ -125,5 +125,5 @@ class SuffixTree:
 
 if __name__ == "__main__":
     suffix_tree = SuffixTree()
-    suffix_tree.build("abcabxabcd")
+    suffix_tree.build("abcabxabcd", visualise=True)
 
