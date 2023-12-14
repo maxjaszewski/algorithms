@@ -57,7 +57,7 @@ class SuffixTree:
         node.end = end
         return node
 
-    def walk(self, i):
+    def position(self, i):
         if (self.active_length == 0):
             self.active_edge = i
         elif self.active_node.children[self.string[self.active_edge]].start + self.active_length - 1 >= \
@@ -82,7 +82,7 @@ class SuffixTree:
         # continue or break if match found and going to next char
         while self.remainder > 0:
             # active edge to current i if length 0
-            self.walk(i)
+            self.position(i)
 
             # no matching edge, create new leaf
             if self.active_node.children.get(self.string[self.active_edge]) is None:
