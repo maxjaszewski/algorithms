@@ -15,17 +15,17 @@ def visualise(suffix_tree):
     }
     plt.clf()
     # Create a simple graph
-    graph = nx.Graph()
+    graph = nx.MultiDiGraph()
     labels = {}
     recursive_node_draw(suffix_tree.string, graph, suffix_tree.root, labels)
     # Draw the graph with node labels
     pos = nx.drawing.nx_pydot.graphviz_layout(graph, prog="dot", root=0)
-    nx.draw_networkx(graph, pos, with_labels=True, labels=labels, font_weight='bold', node_size=700, node_color='skyblue',
+    nx.draw_networkx(graph, pos, with_labels=True, labels=labels, font_weight='bold', node_size=300, node_color='skyblue',
             font_color='black', font_size=8, edgelist=[])
     edge_styles = nx.get_edge_attributes(graph, 'style')
     dashed_edges = [edge for edge, style in edge_styles.items() if style == 'link']
     solid_edges = [edge for edge, style in edge_styles.items() if style != 'link']
-    nx.draw_networkx_edges(graph, pos, edgelist=dashed_edges, edge_color='red', style='dashed', width=2)
+    nx.draw_networkx_edges(graph, pos, edgelist=dashed_edges, edge_color='red', style='dashed', width=1)
     nx.draw_networkx_edges(graph, pos, edgelist=solid_edges, edge_color='black', width=1)
     text = "\n".join(f"{key}: {value}" for key, value in graph_labels.items())
     plt.text(1.10, 1.10, text, horizontalalignment='right', verticalalignment='top', transform=plt.gca().transAxes)
