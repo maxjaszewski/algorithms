@@ -49,6 +49,7 @@ class SuffixTree:
         self.active_node = self.root
         for i in range(self.size):
             self.extend(i)
+            visualise(self, i)
 
     def create_node(self, start, end, is_leaf):
         node = Node(is_leaf)
@@ -67,10 +68,23 @@ class SuffixTree:
         while self.remainder > 0:
 
             # active edge to current i if length 0
+
             if self.active_length == 0:
                 self.active_edge = i
+            else:
+                # walk down
+                while self.active_node.children.get(self.string[self.active_edge]) and \
+                        self.active_node.children[self.string[self.active_edge]].start + self.active_length - 1 >= \
+                        self.active_node.children[self.string[self.active_edge]].end and not \
+                        self.active_node.children[self.string[self.active_edge]].is_leaf:
+                    start = self.active_node.children[self.string[self.active_edge]].start
+                    end = self.active_node.children[self.string[self.active_edge]].end
+                    diff = start-end+1
+                    self.active_node = self.active_node.children[self.string[self.active_edge]]
+                    self.active_length -= diff
+                    self.active_edge = self.active_edge + diff
 
-            # no matching edge, create new leaf
+                    # no matching edge, create new leaf
             if self.active_node.children.get(self.string[self.active_edge]) is None:
                 self.active_node.children[self.string[self.active_edge]] = self.create_node(start=i, end=None,
                                                                                             is_leaf=True)
@@ -82,14 +96,6 @@ class SuffixTree:
                 if self.string[self.active_node.children[self.string[self.active_edge]].start + self.active_length] == \
                         self.string[i]:
                     self.active_length += 1
-
-                    if self.active_node.children[self.string[self.active_edge]].start + self.active_length - 1 == \
-                            self.active_node.children[self.string[self.active_edge]].end and not \
-                    self.active_node.children[self.string[self.active_edge]].is_leaf:
-                        self.active_node = self.active_node.children[self.string[self.active_edge]]
-                        self.active_edge = None
-                        self.active_length = 0
-
                     break
                     # check if walking to next node
 
@@ -126,5 +132,4 @@ class SuffixTree:
 
 if __name__ == "__main__":
     suffix_tree = SuffixTree()
-    suffix_tree.build("maximilianjaszewski")
-    visualise(suffix_tree)
+    suffix_tree.build("pallpall")
