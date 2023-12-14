@@ -42,8 +42,8 @@ class SuffixTree:
         self.size = 0
 
     def build(self, data: str):
-        self.string = data
-        self.size = len(data)
+        self.string = data + "$"
+        self.size = len(self.string)
         self.root = self.create_node(-1, -1, False)
         # self.root.suffix_link = self.root  # Root has start and end -1
         self.active_node = self.root
