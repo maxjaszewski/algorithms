@@ -61,16 +61,15 @@ class SuffixTree:
         if (self.active_length == 0):
             self.active_edge = i
         elif self.active_node.children[self.string[self.active_edge]].start + self.active_length - 1 >= \
-                    self.active_node.children[self.string[self.active_edge]].end and not \
-                    self.active_node.children[self.string[self.active_edge]].is_leaf:
-                start = self.active_node.children[self.string[self.active_edge]].start
-                end = self.active_node.children[self.string[self.active_edge]].end
-                diff = end-start+1
-                self.active_node = self.active_node.children[self.string[self.active_edge]]
-                self.active_length -= diff
-                self.active_edge = self.active_edge + diff
-                self.walk(i)
-
+                self.active_node.children[self.string[self.active_edge]].end and not \
+                self.active_node.children[self.string[self.active_edge]].is_leaf:
+            start = self.active_node.children[self.string[self.active_edge]].start
+            end = self.active_node.children[self.string[self.active_edge]].end
+            diff = end - start + 1
+            self.active_node = self.active_node.children[self.string[self.active_edge]]
+            self.active_length -= diff
+            self.active_edge = self.active_edge + diff
+            self.position(i)
 
     def extend(self, i: int):
         # update leaf end global with extension
@@ -81,7 +80,7 @@ class SuffixTree:
         # loop continues while inserting remaining suffixes
         # continue or break if match found and going to next char
         while self.remainder > 0:
-            # active edge to current i if length 0
+            # Follow active length to position
             self.position(i)
 
             # no matching edge, create new leaf
@@ -134,4 +133,4 @@ class SuffixTree:
 
 if __name__ == "__main__":
     suffix_tree = SuffixTree()
-    suffix_tree.build("abcabxabcd")
+    suffix_tree.build("abcabmabn")
