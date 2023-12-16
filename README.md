@@ -21,4 +21,6 @@ All algorithms have the following files:
 
 ## Algorithms
 
-1. [ukkonen's suffix tree construction](https://github.com/maxjaszewski/algorithms/tree/main/ukkonens)
+1. [Ukkonen's Suffix Tree construction](https://github.com/maxjaszewski/algorithms/tree/main/ukkonens)
+2. [Disjoint Set](https://github.com/maxjaszewski/algorithms/tree/main/disjoint_set)
+3. [Binomial Heap](https://github.com/maxjaszewski/algorithms/tree/main/binomial_heap)
