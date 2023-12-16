@@ -1,8 +1,8 @@
 class Node:
     """
-    Data structure for Binomial Heap representation
+    Data structure used by Binomial Heap representation
     """
-    def __init__(self):
+    def __init__(self, key):
         self.parent = None
         self.key = None
         self.child = None
