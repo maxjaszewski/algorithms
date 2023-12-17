@@ -100,24 +100,31 @@ def merge(h1, h2):
     p1, p2 = h1.head, h2.head
     curr, res = None, None
 
+    if p1 is None:
+        return p2
+    elif p2 is None:
+        return p1
+
     # sort nodes into monotonically increasing order
     while p1 is not None and p2 is not None:
-        if p1.key <= p2.key:
+        if p1.degree <= p2.degree:
             # init
-            if not curr and not res:
+            if not res:
                 curr, res = p1, p1
             else:
                 curr.sibling = p1
-                p1 = p1.sibling
+                curr = curr.sibling
+            p1 = p1.sibling
         else:
             # init
-            if not curr and not res:
+            if not res:
                 curr, res = p2, p2
             else:
                 curr.sibling = p2
-                p2 = p2.sibling
+                curr = curr.sibling
+            p2 = p2.sibling
         # shift curr to sibling
-        curr = curr.sibling
+
 
     # add remaining non-empty trees
     if p1 is not None:
@@ -148,7 +155,7 @@ def union(h1, h2):
     :return: Union heap
     """
     res_heap = BinomialHeap()
-    res_heap.head = merge(h1, h2).head
+    res_heap.head = merge(h1, h2)
     if res_heap.head is None:
         return res_heap
     prev, curr, next = None, res_heap.head, res_heap.head.sibling
@@ -160,10 +167,12 @@ def union(h1, h2):
                 curr.sibling = next.sibling
                 link(next, curr)
             else:
-                if prev is not None:
-                    prev.sibling = next
-                else:
+                if prev is None:
                     res_heap.head = next
+                else:
+                    prev.sibling = next
                 link(curr, next)
+                curr = next
+            next = curr.sibling
 
     return res_heap
