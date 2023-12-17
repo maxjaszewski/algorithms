@@ -46,13 +46,12 @@ class BinomialHeap:
         children_heap = BinomialHeap()
         children_heap.head = min_node.child
         children_heap.reverse()
-        self.head = union(self, children_heap)
+        self.head = union(self, children_heap).head
 
         min_node.child = None
         min_node.degree = None
         min_node.sibling = None
         return min_node
-
 
     def decrease_key(self, node, key):
         """
@@ -62,26 +61,35 @@ class BinomialHeap:
         """
         if key >= node.key:
             raise Exception("Cannot decrease key value to larger value")
-        # todo rest
-        pass
+        curr = node
+        while node.parent and node.key < node.parent.key:
+            curr.key = node.parent.key
+        curr.key = key
 
     def delete(self, node):
         """
         Removes node
         :param node:
         """
-        pass  # todo
+        self.decrease_key(node, float('-inf'))
+        self.extract_min()
 
     def reverse(self):
-        start = self.head
-        while start is not None:
-            
-            start = start.sibling
-        self.head = start
+        curr = self.head
+        new_start = None
+        while curr is not None:
+            snap_next = curr.sibling
+            curr.sibling = new_start
+            new_start = curr
+            curr = snap_next
+        self.head = new_start
+
 
 """
                                             -- FUNCTIONS --
 """
+
+
 def merge(h1, h2):
     """
     Merge two binomial heaps into one linked list with roots in monotonically increasing order
@@ -131,6 +139,7 @@ def link(x, y):
     x.parent = y
     y.child = x
 
+
 def union(h1, h2):
     """
     Join two Binomial Heaps
@@ -139,7 +148,7 @@ def union(h1, h2):
     :return: Union heap
     """
     res_heap = BinomialHeap()
-    res_heap.head = merge(h1, h2)
+    res_heap.head = merge(h1, h2).head
     if res_heap.head is None:
         return res_heap
     prev, curr, next = None, res_heap.head, res_heap.head.sibling
@@ -158,8 +167,3 @@ def union(h1, h2):
                 link(curr, next)
 
     return res_heap
-
-
-
-
-
