@@ -16,7 +16,7 @@ class BinomialHeap:
         """
         heap = BinomialHeap()
         heap.head = Node(key)
-        self.head = merge(self, heap)
+        self.head = union(self, heap).head
 
     def min(self):
         """
