@@ -1,4 +1,4 @@
-from visualisation import visualise
+from visualise import visualise
 
 
 class Node:
