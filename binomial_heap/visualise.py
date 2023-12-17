@@ -44,3 +44,13 @@ if __name__ == "__main__":
     heap.insert(5)
     heap.insert(30)
     draw_binomial_heap(heap)
+    min_node, min_node_left = heap.min()
+    print(f"minimum value is {min_node.key}")
+    print(f'Extracting minimum value {heap.extract_min().key}')
+    draw_binomial_heap(heap)
+    new_min, new_min_left = heap.min()
+    print(f'Deleting new minimum value {new_min.key}')
+    heap.delete(new_min)
+    draw_binomial_heap(heap)
+
+

@@ -24,7 +24,7 @@ class BinomialHeap:
         :return: Node object
         """
         # Track the parent as well so min_node can be removed when extracting minimum value
-        minimum, min_node, min_node_left = float('-inf'), None, None
+        minimum, min_node, min_node_left = float('inf'), None, None
         prev, curr = None, self.head
         while curr is not None:
             if curr.key < minimum:
@@ -80,6 +80,8 @@ class BinomialHeap:
         while curr is not None:
             snap_next = curr.sibling
             curr.sibling = new_start
+            # Removing parent pointer TODO move this to own location
+            curr.parent = None
             new_start = curr
             curr = snap_next
         self.head = new_start
