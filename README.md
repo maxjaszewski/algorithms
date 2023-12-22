@@ -15,3 +15,4 @@ pip install -r requirements.txt
 1. [Ukkonen's Suffix Tree construction](https://github.com/maxjaszewski/algorithms/tree/main/ukkonens)
 2. [Disjoint Set](https://github.com/maxjaszewski/algorithms/tree/main/disjoint_set)
 3. [Binomial Heap](https://github.com/maxjaszewski/algorithms/tree/main/binomial_heap)
+4. [Fibonnaci Heap](https://github.com/maxjaszewski/algorithms/tree/main/fibonacci_heap)
